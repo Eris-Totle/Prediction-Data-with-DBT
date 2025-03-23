@@ -1,4 +1,4 @@
-WITH p_data AS (
+WITH population_data AS (
     SELECT 
         "REGION", 
         "STATE", 
