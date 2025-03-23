@@ -1,5 +1,3 @@
--- models/population_growth_rate.sql
-
 WITH growth_rate AS (
     SELECT 
         "REGION", 
