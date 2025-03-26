@@ -1,0 +1,22 @@
+# Experimenting with time series prediction for DBT transformed data. 
+df = pd.read_sql_query(sql_query, engine)
+
+df.rename(columns={'DATE': 'ds', 'POPULATION': 'y'}, inplace=True)
+
+df['ds'] = pd.to_datetime(df['ds'])
+
+df = df[['ds', 'y']]
+
+print(df.head())
+
+model = Prophet()
+
+model.fit(df)
+
+future = model.make_future_dataframe(periods=3, freq='Y')
+
+forecast = model.predict(future)
+
+model.plot(forecast)
+
+print(forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']])
