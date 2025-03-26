@@ -1,4 +1,4 @@
-# Experimenting with time series prediction for DBT transformed data. [This tutorial](https://www.kaggle.com/code/prashant111/tutorial-time-series-forecasting-with-prophet) was helpful here. 
+# Experimenting with time series prediction for DBT transformed data.
 df = pd.read_sql_query(sql_query, engine)
 
 df.rename(columns={'DATE': 'ds', 'POPULATION': 'y'}, inplace=True)
