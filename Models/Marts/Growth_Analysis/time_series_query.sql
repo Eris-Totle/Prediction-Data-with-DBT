@@ -12,7 +12,7 @@ WITH population_data AS (
         "POPESTIMATE2022",
         "POPESTIMATE2023"
     FROM 
-        "Population_Prediction"  -- Using the table you loaded into PostgreSQL
+        "Population_Prediction"  
 ),
 population_long AS (
     SELECT 
