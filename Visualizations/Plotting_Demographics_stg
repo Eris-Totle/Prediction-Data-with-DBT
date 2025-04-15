@@ -1,1 +1,27 @@
 # code for plotting from the Demographics 
+
+import pandas as pd
+import psycopg2
+import numpy as np
+from sqlalchemy import create_engine
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib
+
+engine = create_engine('postgresql://username:password@localhost:port/postgres')
+
+query = """
+SELECT * FROM {{ ref('Population_Prediction') }}.stg_population_prediction # plug your details in here if you want to run this code/ project
+"""
+df = pd.read_sql_query(query, engine)
+
+plt.figure(figsize=(30, 25))
+sns.barplot(data=df, x='race_cat', y='POPESTIMATE2023', hue='gender_cat', estimator=np.sum)
+plt.title("2023 Population by Race and Gender", fontsize=28)
+plt.xlabel("Race/Gender", fontsize=24)
+plt.ylabel("Population Estimate", fontsize=24)
+plt.xticks(rotation=45, fontsize=20)
+plt.yticks(fontsize=20)
+plt.legend(title='Gender', title_fontsize=22, fontsize=20)
+plt.tight_layout()
+plt.show()
