@@ -27,7 +27,7 @@ FROM demographic_stg
 GROUP BY "AGE", 
 "RACE_CAT", 
 "GENDER_CAT", 
-ORDERY BY "AGE";
+ORDER BY "AGE";
 '''
 df = pd.read_sql_query(query, engine)
 
