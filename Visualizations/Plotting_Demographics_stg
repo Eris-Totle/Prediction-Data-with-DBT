@@ -10,15 +10,27 @@ import matplotlib
 
 engine = create_engine('postgresql://username:password@localhost:port/postgres')
 
-query = """
-SELECT * FROM {{ ref('Population_Prediction') }}.stg_population_prediction # plug your details in here if you want to run this code/ project
-"""
+# Test connection and list the tables
+tables = pd.read_sql("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", engine)
+print(tables)
+
+# Query sales data
+sales_query = '''
+SELECT "AGE", "RACE_CAT", 
+"GENDER_CAT", 
+SUM("ESTIMATESBASE2020") AS Base_2020, 
+SUM("POPESTIMATE2020") AS Est_2020, 
+SUM("POPESTIMATE2021") AS Est_2021, 
+SUM("POPESTIMATE2022") AS Est_2022, 
+SUM("POPESTIMATE2023") AS Est_2023
+FROM demographic_stg
+GROUP BY "AGE", 
+"RACE_CAT", 
+"GENDER_CAT", 
+ORDERY BY "AGE";
+'''
 df = pd.read_sql_query(query, engine)
 
-# some transformations will be needed for this staging query before plotting
-
-df_filtered = df[df['gender_cat'] != 'Total']
-grouped = df_filtered.groupby(['race_cat', 'gender_cat'])['POPESTIMATE2023'].sum().reset_index()
 
 # plot the result 
 
