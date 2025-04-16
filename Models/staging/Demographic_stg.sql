@@ -17,7 +17,7 @@ WITH demographic_estimates AS (
     CASE 
         WHEN "SEX"=0 THEN 'Total'
         WHEN "SEX"=1 THEN 'Male' 
-        WHEN "AGE"=2 THEN 'Female'
+        WHEN "sex"=2 THEN 'Female'
         END AS SEX_CAT,
     "ESTIMATESBASE2020", 
     "POPESTIMATE2020", 
