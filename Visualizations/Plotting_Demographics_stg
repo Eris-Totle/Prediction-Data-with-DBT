@@ -15,6 +15,13 @@ SELECT * FROM {{ ref('Population_Prediction') }}.stg_population_prediction # plu
 """
 df = pd.read_sql_query(query, engine)
 
+# some transformations will be needed for this staging query before plotting
+
+df_filtered = df[df['gender_cat'] != 'Total']
+grouped = df_filtered.groupby(['race_cat', 'gender_cat'])['POPESTIMATE2023'].sum().reset_index()
+
+# plot the result 
+
 plt.figure(figsize=(30, 25))
 sns.barplot(data=df, x='race_cat', y='POPESTIMATE2023', hue='gender_cat', estimator=np.sum)
 plt.title("2023 Population by Race and Gender", fontsize=28)
