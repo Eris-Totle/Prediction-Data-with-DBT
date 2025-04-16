@@ -1,4 +1,4 @@
-WITH demographic_estimates AS (
+WITH demographic_stg AS (
   SELECT 
     "AGE",
     CASE
@@ -28,4 +28,4 @@ WITH demographic_estimates AS (
 )
 )
 SELECT * 
-FROM demographic_estimates
+FROM demographic_stg
