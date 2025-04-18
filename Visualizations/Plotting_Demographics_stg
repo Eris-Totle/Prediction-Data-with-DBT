@@ -26,16 +26,16 @@ SUM("POPESTIMATE2023") AS Est_2023
 FROM demographic_stg
 GROUP BY "AGE", 
 "RACE_CAT", 
-"GENDER_CAT", 
+"GENDER_CAT" 
 ORDER BY "AGE";
 '''
-df = pd.read_sql_query(query, engine)
+df = pd.read_sql_query(dem_query, engine)
 
 
 # plot the result 
 
 plt.figure(figsize=(30, 25))
-sns.barplot(data=df, x='race_cat', y='POPESTIMATE2023', hue='gender_cat', estimator=np.sum)
+sns.lineplot(data=df, x='race_cat', y='POPESTIMATE2023', hue='gender_cat')
 plt.title("2023 Population by Race and Gender", fontsize=28)
 plt.xlabel("Race/Gender", fontsize=24)
 plt.ylabel("Population Estimate", fontsize=24)
@@ -77,7 +77,7 @@ SELECT
   "POPESTIMATE2023" AS population
 FROM demographic_stg''';
 
-df_age = pd.read_sql_query(query, engine)
+df_age = pd.read_sql_query(age_query, engine)
 
 plt.figure(figsize=(30, 25))
 sns.barplot(data=df_age, x='age', y='population', hue='year')
