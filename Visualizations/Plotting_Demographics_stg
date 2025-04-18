@@ -15,7 +15,7 @@ tables = pd.read_sql("SELECT table_name FROM information_schema.tables WHERE tab
 print(tables)
 
 # Query sales data
-sales_query = '''
+dem_query = '''
 SELECT "AGE", "RACE_CAT", 
 "GENDER_CAT", 
 SUM("ESTIMATESBASE2020") AS Base_2020, 
@@ -38,6 +38,51 @@ plt.figure(figsize=(30, 25))
 sns.barplot(data=df, x='race_cat', y='POPESTIMATE2023', hue='gender_cat', estimator=np.sum)
 plt.title("2023 Population by Race and Gender", fontsize=28)
 plt.xlabel("Race/Gender", fontsize=24)
+plt.ylabel("Population Estimate", fontsize=24)
+plt.xticks(rotation=45, fontsize=20)
+plt.yticks(fontsize=20)
+plt.legend(title='Gender', title_fontsize=22, fontsize=20)
+plt.tight_layout()
+plt.show()
+
+# Now I want to look at the trends in population predictions (by age) between the different years of reported population
+
+age_query = '''SELECT
+  "AGE",
+  '2020' AS year,
+  "POPESTIMATE2020" AS population
+FROM demographic_stg
+
+UNION ALL
+
+SELECT
+  "AGE",
+  '2021' AS year,
+  "POPESTIMATE2021" AS population
+FROM demographic_stg
+
+UNION ALL
+
+SELECT
+  "AGE",
+  '2022' AS year,
+  "POPESTIMATE2022" AS population
+FROM demographic_stg
+
+UNION ALL
+
+SELECT
+  "AGE",
+  '2023' AS year,
+  "POPESTIMATE2023" AS population
+FROM demographic_stg''';
+
+df_age = pd.read_sql_query(query, engine)
+
+plt.figure(figsize=(30, 25))
+sns.barplot(data=df_age, x='age', y='population', hue='year')
+plt.title("Population Predictions Across Years", fontsize=28)
+plt.xlabel("Age", fontsize=24)
 plt.ylabel("Population Estimate", fontsize=24)
 plt.xticks(rotation=45, fontsize=20)
 plt.yticks(fontsize=20)
