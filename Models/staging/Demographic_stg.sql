@@ -8,17 +8,20 @@ WITH demographic_stg AS (
         WHEN "RACE"=4 THEN 'Asian'
         WHEN "RACE"=5 THEN 'Native_Hawaiian_or_Other_Pacific_Islander'
         WHEN "RACE"=6 THEN 'Two_or_more_races'
-        END AS RACE_CAT,
+    END AS RACE_CAT,
+  
     CASE
         WHEN "ORIGIN"=0 THEN 'Total'
         WHEN "ORIGIN"=1 THEN 'Not_Hispanic'
         WHEN "ORIGIN"=2 THEN 'HISPANIC'
-        END AS ORIGIN_CAT,
+    END AS ORIGIN_CAT,
+  
     CASE 
         WHEN "SEX"=0 THEN 'Total'
         WHEN "SEX"=1 THEN 'Male' 
         WHEN "sex"=2 THEN 'Female'
-        END AS SEX_CAT,
+    END AS SEX_CAT,
+  
     "ESTIMATESBASE2020", 
     "POPESTIMATE2020", 
     "POPESTIMATE2021", 
