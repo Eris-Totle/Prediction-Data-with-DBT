@@ -1,0 +1,39 @@
+state_stg = '''WITH State_stg AS (
+  SELECT 
+    "STATE", 
+    "NAME", 
+    SUM("ESTIMATESBASE2020") AS sum_base_2020, 
+    SUM("POPESTIMATE2020") AS sum_est_2020, 
+    SUM("POPESTIMATE2021") AS sum_est_2021, 
+    SUM("POPESTIMATE2022") AS sum_est_2022, 
+    SUM("POPESTIMATE2023") AS sum_est_2023
+  FROM "State_stg"
+  WHERE "SEX" = 0 AND "ORIGIN" = 0
+  GROUP BY "STATE", "NAME"
+)
+SELECT * 
+FROM State_stg;'''
+
+df_state = pd.read_sql(state_stg, engine)
+
+df_long = df_state.melt(
+    id_vars=["STATE", "NAME"],
+    value_vars=["sum_est_2020", "sum_est_2021", "sum_est_2022", "sum_est_2023"],
+    var_name="Year",
+    value_name="Population"
+)
+
+# Step 2: Clean up year format
+df_long["Year"] = df_long["Year"].str.extract("(\d{4})").astype(int)
+
+# Step 3: Plot
+plt.figure(figsize=(16, 8))
+sns.barplot(data=df_long, x='NAME', y='Population', hue='Year')
+
+plt.title("Population by State and Year")
+plt.xlabel("State")
+plt.ylabel("Population")
+plt.xticks(rotation=45, ha='right')
+plt.legend(title="Year")
+plt.tight_layout()
+plt.show()
