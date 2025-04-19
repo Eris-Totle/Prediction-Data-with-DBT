@@ -1,4 +1,4 @@
-WITH State_Estimates AS (
+WITH State_stg AS (
   SELECT 
     "STATE", 
     "NAME", 
@@ -11,4 +11,4 @@ WITH State_Estimates AS (
   WHERE "SEX" = 0 AND "ORIGIN" = 0
 )
 SELECT * 
-FROM State_Estimates;
+FROM State_stg;
