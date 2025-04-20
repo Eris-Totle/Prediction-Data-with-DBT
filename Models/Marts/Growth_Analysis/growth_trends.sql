@@ -7,6 +7,7 @@ WITH growth_trends AS (
         ("POPESTIMATE2023" - "POPESTIMATE2022") / NULLIF("POPESTIMATE2022", 0) * 100 AS growth_2023_2022
     FROM 
         {{ ref('population_prediction') }}
+    WHERE "SEX"=0 AND "ORIGIN"=0 # -modify this as needed pending your analysis needs, I ran into the issue of doubling values without filtering. 
 )
 SELECT 
     "REGION", 
