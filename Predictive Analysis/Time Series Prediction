@@ -1,5 +1,29 @@
 # Experimenting with time series prediction for DBT transformed data.
-df = pd.read_sql_query(sql_query, engine)
+
+import pandas as pd
+from sqlalchemy import create_engine
+import seaborn as sns
+import matplotlib.pyplot as plt
+from kmodes.kprototypes import KPrototypes
+
+# PostgreSQL connection string from DBT example
+db_connection_url = "(Use your postgres creds)"
+
+# Create SQLAlchemy engine
+engine = create_engine(db_connection_url)
+
+# Test connection and list the tables
+tables = pd.read_sql("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", engine)
+print(tables)
+
+# Query sales data
+growth_query = '''
+SELECT*FROM population_data;
+'''
+df = pd.read_sql(growth_query, engine)
+
+# Display the first few rows
+print(df.head())
 
 df.rename(columns={'DATE': 'ds', 'POPULATION': 'y'}, inplace=True)
 
