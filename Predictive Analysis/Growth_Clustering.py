@@ -34,7 +34,7 @@ clusters = kproto.fit_predict(X, categorical=[0, 1])
 
 df['cluster'] = clusters
 
-print(df.head(10)
+print(df.head(10))
 print(df['clusters'].value_counts())
 
 # some simple graphs from the output, assuming the project handles the raw data leaving room for further analysis as needed. 
