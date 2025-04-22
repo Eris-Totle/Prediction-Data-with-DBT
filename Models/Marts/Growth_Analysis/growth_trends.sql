@@ -8,7 +8,7 @@ WITH state_totals AS (
         SUM("POPESTIMATE2021") AS pop_2021,
         SUM("POPESTIMATE2022") AS pop_2022,
         SUM("POPESTIMATE2023") AS pop_2023
-    FROM "Population_Prediction"
+    FROM {{ source('raw_data', 'Population_Prediction') }}
     WHERE "SEX" = 0 AND "ORIGIN" = 0
     GROUP BY "REGION", "NAME"
 ),
@@ -23,4 +23,4 @@ growth_trends AS (
     FROM state_totals
 )
 
-SELECT * FROM growth_trends;
+SELECT * FROM growth_trends
