@@ -12,7 +12,7 @@ WITH population_data AS (
         "POPESTIMATE2022",
         "POPESTIMATE2023"
     FROM 
-        "Population_Prediction"  
+        {{ source('raw_data', 'Population_Prediction') }}  
 ),
 population_long AS (
     SELECT 
@@ -56,4 +56,4 @@ population_long AS (
     FROM population_data
 )
 SELECT * 
-FROM population_long;
+FROM population_long
