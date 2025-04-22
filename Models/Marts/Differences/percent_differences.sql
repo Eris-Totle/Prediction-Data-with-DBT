@@ -22,4 +22,4 @@ WITH Percent_Differences AS
         "AGE"
 )
 
-SELECT * FROM Percent_Differences;
+SELECT * FROM Percent_Differences
