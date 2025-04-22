@@ -10,7 +10,7 @@ WITH growth_rate AS (
         ("POPESTIMATE2022" - "POPESTIMATE2021") / NULLIF("POPESTIMATE2021", 0) * 100 AS growth_rate_2022_2021,
         ("POPESTIMATE2023" - "POPESTIMATE2022") / NULLIF("POPESTIMATE2022", 0) * 100 AS growth_rate_2023_2022
     FROM 
-        {{ ref('population_prediction') }}
+        {{ source('raw_data', 'Population_Prediction') }}
 )
 SELECT 
     "REGION",
@@ -21,4 +21,4 @@ SELECT
 FROM growth_rate
 GROUP BY 
     "REGION", 
-    "DIVISION";
+    "DIVISION"
