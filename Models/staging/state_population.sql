@@ -11,4 +11,4 @@ WITH State_stg AS (
   WHERE "SEX" = 0 AND "ORIGIN" = 0
 )
 SELECT * 
-FROM State_stg;
+FROM State_stg
