@@ -4,17 +4,4 @@ This is an extention/ experiment with engineering tools expanding on use with th
 
 ## Project Structure
 
-├── Models/
-│   ├── marts/
-│   │   ├── Differences/
-│   │   │   ├── percent_differences.sql
-│   │   │   └── yearly_differences.sql
-│   │   └── Growth/
-│   │       ├── growth_rate.sql
-│   │       ├── growth_trends.sql
-│   │       └── time_series.sql
-│   └── staging/
-│       ├── demographic_stg.sql
-│       └── state_population.sql
-└── profiles.yml
 
