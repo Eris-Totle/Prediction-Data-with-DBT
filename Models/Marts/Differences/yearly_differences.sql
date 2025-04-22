@@ -22,4 +22,4 @@ WITH Yearly_Differences AS
         "AGE"
 )
 
-SELECT * FROM Yearly_Differences;
+SELECT * FROM Yearly_Differences
