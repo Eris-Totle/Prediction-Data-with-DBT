@@ -1,7 +1,7 @@
 WITH growth_rate AS (
     SELECT 
         "REGION", 
-        "NAME", 
+        "DIVISION", 
         "SEX", 
         "ORIGIN", 
         "RACE", 
@@ -14,11 +14,11 @@ WITH growth_rate AS (
 )
 SELECT 
     "REGION",
-    "NAME",
+    "DIVISION",
     AVG(growth_rate_2021_2020) AS avg_growth_rate_2021_2020,
     AVG(growth_rate_2022_2021) AS avg_growth_rate_2022_2021,
     AVG(growth_rate_2023_2022) AS avg_growth_rate_2023_2022
 FROM growth_rate
 GROUP BY 
     "REGION", 
-    "NAME";
+    "DIVISION";
