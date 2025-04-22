@@ -19,7 +19,7 @@ WITH demographic_stg AS (
     CASE 
         WHEN "SEX"=0 THEN 'Total'
         WHEN "SEX"=1 THEN 'Male' 
-        WHEN "sex"=2 THEN 'Female'
+        WHEN "SEX"=2 THEN 'Female'
     END AS SEX_CAT,
   
     "ESTIMATESBASE2020", 
@@ -27,7 +27,7 @@ WITH demographic_stg AS (
     "POPESTIMATE2021", 
     "POPESTIMATE2022", 
     "POPESTIMATE2023"
-  FROM {{ ref('Population_Prediction') }} ## for folks interested in running this outside of the staging process - you can replace with "Population_Predictions", or whatever you decide to sent it to postgres as.
+  FROM {{ source('raw_data', 'Population_Prediction') }} -- for folks interested in running this outside of the staging process - you can replace with "Population_Predictions", or whatever you decide to sent it to postgres as.
 )
 )
 SELECT * 
